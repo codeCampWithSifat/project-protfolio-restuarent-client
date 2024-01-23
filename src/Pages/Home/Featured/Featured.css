@@ -1,0 +1,7 @@
+.featured_item {
+  background-image: url("../../../assets//home//featured.jpg");
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+}
