@@ -11,7 +11,7 @@ const OrderTab = ({ items }) => {
       return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
   };
-  console.log(pagination);
+  // console.log(pagination);
 
   return (
     <div>
