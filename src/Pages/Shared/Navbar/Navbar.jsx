@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+
+  const [cart] = useCart();
 
   const handleLogout = () => {
     logout()
@@ -26,6 +30,7 @@ const Navbar = () => {
       <li>
         <Link to="/secret">Secret</Link>
       </li>
+
       {!user ? (
         <li>
           <Link to="/login">login</Link>
@@ -41,7 +46,7 @@ const Navbar = () => {
   );
   return (
     <>
-      <div className="navbar fixed z-10 bg-base-100">
+      <div className="max-w-screen-xl navbar fixed z-10 bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -73,7 +78,18 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end mr-5">
-          <a className="btn">{user?.displayName}</a>
+          <span className="btn">{user?.displayName}</span>
+          <li>
+            <Link to="/dashboard/mycart">
+              <button className=" btn gap-2 btn-sm">
+                <FaShoppingCart />
+                <div className="badge badge-secondary">
+                  {" "}
+                  + {cart.length || 0}
+                </div>
+              </button>
+            </Link>
+          </li>
         </div>
       </div>
     </>
