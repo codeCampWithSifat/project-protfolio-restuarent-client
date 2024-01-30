@@ -20,7 +20,7 @@ const FoodCart = ({ item }) => {
       email: user?.email,
     };
     if (user && user?.email) {
-      fetch(`http://localhost:3001/carts`, {
+      fetch(`http://localhost:5000/carts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

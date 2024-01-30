@@ -1,9 +1,9 @@
 const LoadingButton = () => {
   return (
-    <div className="h-[600px] flex justify-center items-center">
+    <div className="h-[700px] flex justify-center items-center">
       <button className="btn">
         <span className="loading loading-spinner"></span>
-        loading
+        Loading
       </button>
     </div>
   );

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const {
@@ -23,15 +24,31 @@ const SignUp = () => {
         console.log(user);
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            navigate(from, { replace: true });
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "User Created Successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            reset();
+            const saveUser = {
+              name: data.name,
+              email: data.email,
+            };
+            fetch(`http://localhost:5000/users`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(saveUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  navigate(from, { replace: true });
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Created Successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  reset();
+                }
+              });
           })
           .catch((error) => {
             console.log(error.errorMessage);
@@ -133,6 +150,9 @@ const SignUp = () => {
           </Link>
         </p>
       </form>
+      <div className=" text-center">
+        <SocialLogin />
+      </div>
     </div>
   );
 };

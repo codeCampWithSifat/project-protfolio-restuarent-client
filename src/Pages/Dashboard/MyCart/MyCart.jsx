@@ -19,7 +19,7 @@ const MyCart = () => {
       confirmButtonText: "Yes, Delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3001/carts/${id}`, {
+        fetch(`http://localhost:5000/carts/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

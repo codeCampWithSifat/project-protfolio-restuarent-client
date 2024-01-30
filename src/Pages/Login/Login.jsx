@@ -8,6 +8,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
 
@@ -23,6 +24,7 @@ const Login = () => {
     const password = form.password.value;
     signIn(email, password)
       .then((res) => {
+        navigate(from, { replace: true });
         const user = res.user;
         console.log(user);
         Swal.fire({
@@ -32,7 +34,6 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -113,6 +114,9 @@ const Login = () => {
           </Link>
         </p>
       </form>
+      <div className=" text-center">
+        <SocialLogin />
+      </div>
     </div>
   );
 };
