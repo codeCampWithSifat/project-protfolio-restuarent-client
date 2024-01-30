@@ -7,13 +7,15 @@ const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin();
   const location = useLocation();
-  if (isAdminLoading || loading) {
+
+  if (loading && isAdminLoading) {
     return <LoadingButton />;
   }
-  if (user && isAdmin) {
-    return children;
+  if (!user || !isAdmin) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  return <Navigate to="/login" state={{ from: location }} replace />;
+
+  return children;
 };
 
 export default AdminRoute;
